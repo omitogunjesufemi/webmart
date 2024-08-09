@@ -1,0 +1,27 @@
+{
+  "name": "webmart",
+  "version": "1.0.0",
+  "description": "A simple e-commerce website with features like product listings, shopping cart, and order history.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "e-commerce",
+    "webmart"
+  ],
+  "author": "Jesufemi Omitogun",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2",
+    "http-errors": "^2.0.0",
+    "mongodb": "^6.8.0",
+    "redis": "^4.7.0"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "mocha": "*"
+  }
+}
