@@ -15,6 +15,7 @@ class DBClient {
         try {
             this.client.connect();
             this.connected = true;
+            console.log('DB connected successfully');
         } catch (error) {
             console.error('DB Connection failed: ', error);
         }
@@ -29,6 +30,11 @@ class DBClient {
     async nbUsers() {
         const noOfUsers = await this.db.collection('users').countDocuments();
         return noOfUsers;
+    }
+
+    async nbProducts() {
+        const noOfProducts = await this.db.collection('products').countDocuments();
+        return noOfProducts;
     }
 
 }
