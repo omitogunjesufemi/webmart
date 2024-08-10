@@ -12,11 +12,13 @@ class AppController {
         });
     }
 
-    static getStats(request, response) {
-        const userCount = dbClient.nbUsers();
+    static async getStats(request, response) {
+        const userCount = await dbClient.nbUsers();
+        const productCount = await dbClient.nbProducts();
 
         response.status(200).json({
             users: userCount,
+            products: productCount,
         });
     }
 }
