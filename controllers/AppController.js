@@ -15,10 +15,14 @@ class AppController {
     static async getStats(request, response) {
         const userCount = await dbClient.nbUsers();
         const productCount = await dbClient.nbProducts();
+        const orderCount = await dbClient.nbOrders();
+        const categoryCount = await dbClient.nbCategories();
 
         response.status(200).json({
             users: userCount,
             products: productCount,
+            orders: orderCount,
+            categories: categoryCount,
         });
     }
 }

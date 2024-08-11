@@ -37,6 +37,16 @@ class DBClient {
         return noOfProducts;
     }
 
+    async nbOrders() {
+        const noOfOrders = await this.db.collection('orders').countDocuments();
+        return noOfOrders;
+    }
+
+    async nbCategories() {
+        const noOfCategories = await this.db.collection('categories').countDocuments();
+        return noOfCategories;
+    }
+
 }
 
 const dbClient = new DBClient();
