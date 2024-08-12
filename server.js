@@ -4,6 +4,7 @@ import productRouter from './routes/ProductRoute';
 import categoryRouter from './routes/CategoryRoute';
 import orderRouter from './routes/OrderRoute';
 import userRouter from './routes/UserRoute';
+import cartRouter from './routes/CartRoute';
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use('/api/v1/', productRouter);
 app.use('/api/v1/', categoryRouter);
 app.use('/api/v1/', orderRouter);
 app.use('/api/v1/', userRouter);
+app.use('/api/v1/', cartRouter);
 
 app.listen(PORT, () => {
   console.log('Server is running on port: ', PORT);
