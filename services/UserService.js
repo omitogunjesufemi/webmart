@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb';
+import bcrypt from 'bcrypt';
 import dbClient from '../storage/db';
 
 class UserService {
@@ -32,17 +33,35 @@ class UserService {
     }
 
     static async createUser(userObj) {
-        if (!userObj.name) {
-            return ({'error': 'Missing user name'});
+        if (!userObj.firstName) {
+            return ({'error': 'Missing user first name'});
+        }
+
+        if (!userObj.lastName) {
+            return ({'error': 'Missing user last name'});
         }
 
         if (!userObj.email) {
             return ({'error': 'Missing user email'});
         }
 
+        if (!userObj.password) {
+            return ({'error': 'Missing user password'});
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashPwd = await bcrypt.hash(userObj.password.trim(), salt);
+
         const user = {
-            name: userObj.name,
-            email: userObj.email,
+            firstName: userObj.firstName.trim(),
+            lastName: userObj.lastName.trim(),
+            email: userObj.email.trim(),
+            telephone: userObj.telephone.trim(),
+            billingAddress: userObj.billingAddress.trim(),
+            isAdmin: userObj.isAdmin || false,
+            isMerch: userObj.isMerch || false,
+            isBuyer: userObj.isBuyer || true,
+            password: hashPwd,
         };
 
         try {
