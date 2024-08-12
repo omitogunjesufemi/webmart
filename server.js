@@ -1,10 +1,13 @@
 import express from 'express';
+import dotenv from 'dotenv';
 import appRouter from './routes/AppRoute'
 import productRouter from './routes/ProductRoute';
 import categoryRouter from './routes/CategoryRoute';
 import orderRouter from './routes/OrderRoute';
 import userRouter from './routes/UserRoute';
 import cartRouter from './routes/CartRoute';
+
+dotenv.config();
 
 const app = express();
 
