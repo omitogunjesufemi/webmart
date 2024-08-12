@@ -1,10 +1,29 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
 import UserService from '../services/UserService';
 
 class AuthController {
     static async signup(request, response) {
+        const { firstName, lastName, email, password } = request.body;
+
+        if (!(email && password && firstName && lastName)) {
+            return response.status(401).json({'error': 'Missing credentials'});
+        }
+
+        const user = await UserService.getUserByEmail(email);
+        if (user) {
+            return response.status(404).json({'error': 'User already exist'});
+        }
+
+        const userObj = {
+            firstName,
+            lastName,
+            email,
+            password
+        };
+        const newUser = await UserService.createUser(userObj);
+
+        return response.status(200).json(newUser);
     }
 
     static async changePassword(request, response) {
@@ -18,7 +37,7 @@ class AuthController {
             return response.status(401).json({'error': 'Missing credentials'});
         }
 
-        const user = UserService.getUserByEmail(email);
+        const user = await UserService.getUserByEmail(email);
 
         const verifiedCred = await bcrypt.compare(password, user.password);
 
