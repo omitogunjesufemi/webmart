@@ -1,7 +1,9 @@
+import { NavLink } from "react-router-dom";
+
 export default function ProductCard() {
   return (
     <section>
-        <div className="card bg-base-100 w-25 shadow">
+        <NavLink className="card bg-base-100 w-30 shadow">
             <figure>
                 <img
                 src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
@@ -16,7 +18,7 @@ export default function ProductCard() {
                 <div className="card-actions justify-left">
                 </div>
             </div>
-        </div>
+        </NavLink>
     </section>
   )
 }
