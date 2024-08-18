@@ -34,7 +34,7 @@ export default function Navbar() {
               <li><a>Item 3</a></li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">webmart</a>
+          <NavLink className="btn btn-ghost text-xl" to="/">webmart</NavLink>
         </div>
         
         <div className="navbar-center hidden lg:flex">
@@ -56,7 +56,7 @@ export default function Navbar() {
         <div className="navbar-end">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <NavLink>Products</NavLink>
+              <NavLink to="/categories">Products</NavLink>
             </li>
             
             <li>
