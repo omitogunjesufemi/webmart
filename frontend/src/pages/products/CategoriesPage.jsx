@@ -1,16 +1,18 @@
+import { NavLink } from "react-router-dom";
+
 export default function CategoriesPage() {
   return (
-    <section className="bg-gray py-8 antialiased dark:bg-gray-900 md:py-16">
+    <section className="bg-base py-8 antialiased dark:bg-base-900 md:py-16">
     <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <div className="mb-4 flex items-center justify-between gap-4 md:mb-8">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Shop by category</h2>
 
-            <a href="#" title="" className="flex items-center text-base font-medium text-primary-700 hover:underline dark:text-primary-500">
+            <NavLink to="#" title="" className="flex items-center text-base font-medium text-primary-700 hover:underline dark:text-primary-500">
             See more categories
             <svg className="ms-1 h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 12H5m14 0-4 4m4-4-4-4" />
             </svg>
-            </a>
+            </NavLink>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
