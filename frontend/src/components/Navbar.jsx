@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 export default function Navbar() {
   return (
     <nav>
@@ -53,8 +55,13 @@ export default function Navbar() {
         
         <div className="navbar-end">
           <ul className="menu menu-horizontal px-1">
-            <li><a>Products</a></li>
-            <li><a>Account</a></li>
+            <li>
+              <NavLink>Products</NavLink>
+            </li>
+            
+            <li>
+              <a>Account</a>
+            </li>
             <li>
               <details>
                 <summary>Help</summary>
