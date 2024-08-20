@@ -1,36 +1,21 @@
 export default function Hero() {
   return (
-	<section>
-		<div className="carousel carousel-center">
-		<div className="carousel-item">
-			<img src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.webp" alt="Pizza" />
-		</div>
-		<div className="carousel-item">
-			<img
-			src="https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.webp"
-			alt="Pizza" />
-		</div>
-		<div className="carousel-item">
-			<img
-			src="https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.webp"
-			alt="Pizza" />
-		</div>
-		<div className="carousel-item">
-			<img
-			src="https://img.daisyui.com/images/stock/photo-1494253109108-2e30c049369b.webp"
-			alt="Pizza" />
-		</div>
-		<div className="carousel-item">
-			<img src="https://img.daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.webp" alt="Pizza" />
-		</div>
-		<div className="carousel-item">
-			<img src="https://img.daisyui.com/images/stock/photo-1559181567-c3190ca9959b.webp" alt="Pizza" />
-		</div>
-		<div className="carousel-item">
-			<img
-			src="https://img.daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.webp"
-			alt="Pizza" />
-		</div>
+	<section className="bg-white px-4 py-8 antialiased dark:bg-gray-900 md:py-16">
+		<div className="mx-auto grid max-w-screen-xl rounded-lg bg-gray-50 p-4 dark:bg-gray-800 md:p-8 lg:grid-cols-12 lg:gap-8 lg:p-16 xl:gap-16">
+			<div className="lg:col-span-5 lg:mt-0">
+			<a href="#">
+				<img className="mb-4 h-56 w-56 dark:hidden sm:h-96 sm:w-96 md:h-full md:w-full" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-components.svg" alt="peripherals" />
+				<img className="mb-4 hidden dark:block md:h-full" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-components-dark.svg" alt="peripherals" />
+			</a>
+			</div>
+			<div className="me-auto place-self-center lg:col-span-7">
+			<h1 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-gray-900 dark:text-white md:text-4xl">
+				Save $500 today on your purchase <br />
+				of a new iMac computer.
+			</h1>
+			<p className="mb-6 text-gray-500 dark:text-gray-400">Reserve your new Apple iMac 27” today and enjoy exclusive savings with qualified activation. Pre-order now to secure your discount.</p>
+			<a href="#" className="inline-flex items-center justify-center rounded-lg bg-primary-700 px-5 py-3 text-center text-base font-medium text-white hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"> Pre-order now </a>
+			</div>
 		</div>
 	</section>
   )
