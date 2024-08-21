@@ -51,7 +51,12 @@ class AuthController {
             {expiresIn: '24h'}
         );
 
-        return response.status(201).json({'token': token});
+        return response.status(201).json({
+            'token': token,
+            'firstName': user.firstName,
+            'lastName': user.lastName,
+            'email': user.email
+        });
     }
 
     static async logout(request, response) {
