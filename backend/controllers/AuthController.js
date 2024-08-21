@@ -4,7 +4,7 @@ import UserService from '../services/UserService';
 
 class AuthController {
     static async signup(request, response) {
-        const { firstName, lastName, email, password } = request.body;
+        const { firstName, lastName, email, password, telephone } = request.body;
 
         if (!(email && password && firstName && lastName)) {
             return response.status(401).json({'error': 'Missing credentials'});
@@ -19,7 +19,8 @@ class AuthController {
             firstName,
             lastName,
             email,
-            password
+            password,
+            telephone
         };
         const newUser = await UserService.createUser(userObj);
 
