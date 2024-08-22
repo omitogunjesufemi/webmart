@@ -5,7 +5,7 @@ import CategoriesPage from "./pages/products/CategoriesPage";
 import Register from "./pages/account/Register";
 import Login from "./pages/account/Login";
 import ProductDetail from "./pages/products/ProductDetail";
-import ProductsListing from "./components/ProductsListing";
+import ProductListing from "./components/ProductListing";
 import OrderSummary from "./pages/orders/OrderSummary";
 import ShoppingCart from "./pages/orders/ShoppingCart";
 import CheckoutPage from "./pages/orders/CheckoutPage";
@@ -20,7 +20,7 @@ export default function App() {
         <Route path="/categories" element={<CategoriesPage />} />
 
         <Route path="/products/:id" element={<ProductDetail />} />
-        <Route path="/products" element={<ProductsListing />} />
+        <Route path="/products" element={<ProductListing />} />
 
         <Route path="/carts/:id" element={<ShoppingCart />} />
         <Route path="/checkouts/:id" element={<CheckoutPage />} />
