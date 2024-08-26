@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react"
+import { useContext } from "react";
+import { CartContext } from "../context/cart";
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   useEffect(() => {
     setIsLoggedIn(document.cookie.split(';').some((item) => item.trim().startsWith('USR_EMAIL')));
   }, []);
+
+  const { cartItems, removeFromCart } = useContext(CartContext);
 
   return (
     <nav className="bg-white dark:bg-gray-800 antialiased">
@@ -15,12 +20,11 @@ export default function Navbar() {
             
             {/* Logo */}
             <div className="shrink-0">
-              <a href="#" title="" className="">
-                <img className="block w-auto h-8 dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/logo-full.svg" alt="" />
-                <img className="hidden w-auto h-8 dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/logo-full-dark.svg" alt="" />
+              <a href="/" title="" className="">
+                <h1 className="block w-auto h-auto dark:hidden text-primary-700 font-black text-3xl"> webmart </h1>
+                <h1 className="hidden w-auto h-auto dark:block text-primary-700 font-black text-3xl"> webmart </h1>
               </a>
             </div>
-
 
             <ul className="hidden lg:flex items-center justify-start gap-6 md:gap-8 py-3 sm:justify-center">
               <li>
@@ -67,115 +71,34 @@ export default function Navbar() {
             </button>
 
             <div id="myCartDropdown1" className="hidden z-10 mx-auto max-w-sm space-y-4 overflow-hidden rounded-lg bg-white p-4 antialiased shadow-lg dark:bg-gray-800">
-              <div className="grid grid-cols-2">
-                <div>
-                  <a href="#" className="truncate text-sm font-semibold leading-none text-gray-900 dark:text-white hover:underline">Apple iPhone 15</a>
-                  <p className="mt-0.5 truncate text-sm font-normal text-gray-500 dark:text-gray-400">$599</p>
-                </div>
-          
-                <div className="flex items-center justify-end gap-6">
-                  <p className="text-sm font-normal leading-none text-gray-500 dark:text-gray-400">Qty: 1</p>
-          
-                  <button data-tooltip-target="tooltipRemoveItem1a" type="button" className="text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-600">
-                    <span className="sr-only"> Remove </span>
-                    <svg className="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                      <path fillRule="evenodd" d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm7.7-3.7a1 1 0 0 0-1.4 1.4l2.3 2.3-2.3 2.3a1 1 0 1 0 1.4 1.4l2.3-2.3 2.3 2.3a1 1 0 0 0 1.4-1.4L13.4 12l2.3-2.3a1 1 0 0 0-1.4-1.4L12 10.6 9.7 8.3Z" clipRule="evenodd" />
-                    </svg>
-                  </button>
-                  <div id="tooltipRemoveItem1a" role="tooltip" className="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700">
-                    Remove item
-                    <div className="tooltip-arrow" data-popper-arrow></div>
+              {cartItems.length > 0 ? cartItems.map((item) => (
+                <>
+                <div className="grid grid-cols-2">
+                  <div>
+                  <a href="#" className="truncate text-sm font-semibold leading-none text-gray-900 dark:text-white hover:underline">{item.name}</a>
+                    <p className="mt-0.5 truncate text-sm font-normal text-gray-500 dark:text-gray-400">N {item.price}</p>
+                  </div>
+            
+                  <div className="flex items-center justify-end gap-6">
+                    <p className="text-sm font-normal leading-none text-gray-500 dark:text-gray-400">Qty: {item.quantity}</p>
+            
+                    <button onClick={() => removeFromCart(item)} type="button" className="text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-600">
+                      <span className="sr-only"> Remove </span>
+                      <svg className="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                        <path fillRule="evenodd" d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm7.7-3.7a1 1 0 0 0-1.4 1.4l2.3 2.3-2.3 2.3a1 1 0 1 0 1.4 1.4l2.3-2.3 2.3 2.3a1 1 0 0 0 1.4-1.4L13.4 12l2.3-2.3a1 1 0 0 0-1.4-1.4L12 10.6 9.7 8.3Z" clipRule="evenodd" />
+                      </svg>
+                    </button>
                   </div>
                 </div>
-              </div>
-          
+                </>
+              )) : 
+              <>
               <div className="grid grid-cols-2">
                 <div>
-                  <a href="#" className="truncate text-sm font-semibold leading-none text-gray-900 dark:text-white hover:underline">Apple iPad Air</a>
-                  <p className="mt-0.5 truncate text-sm font-normal text-gray-500 dark:text-gray-400">$499</p>
-                </div>
-          
-                <div className="flex items-center justify-end gap-6">
-                  <p className="text-sm font-normal leading-none text-gray-500 dark:text-gray-400">Qty: 1</p>
-          
-                  <button data-tooltip-target="tooltipRemoveItem2a" type="button" className="text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-600">
-                    <span className="sr-only"> Remove </span>
-                    <svg className="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                      <path fillRule="evenodd" d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm7.7-3.7a1 1 0 0 0-1.4 1.4l2.3 2.3-2.3 2.3a1 1 0 1 0 1.4 1.4l2.3-2.3 2.3 2.3a1 1 0 0 0 1.4-1.4L13.4 12l2.3-2.3a1 1 0 0 0-1.4-1.4L12 10.6 9.7 8.3Z" clipRule="evenodd" />
-                    </svg>
-                  </button>
-                  <div id="tooltipRemoveItem2a" role="tooltip" className="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700">
-                    Remove item
-                    <div className="tooltip-arrow" data-popper-arrow></div>
-                  </div>
+                  <a href="#" className="truncate text-sm font-semibold leading-none text-gray-900 dark:text-white hover:underline">No item selected</a>
                 </div>
               </div>
-          
-              <div className="grid grid-cols-2">
-                <div>
-                  <a href="#" className="truncate text-sm font-semibold leading-none text-gray-900 dark:text-white hover:underline">Apple Watch SE</a>
-                  <p className="mt-0.5 truncate text-sm font-normal text-gray-500 dark:text-gray-400">$598</p>
-                </div>
-          
-                <div className="flex items-center justify-end gap-6">
-                  <p className="text-sm font-normal leading-none text-gray-500 dark:text-gray-400">Qty: 2</p>
-          
-                  <button data-tooltip-target="tooltipRemoveItem3b" type="button" className="text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-600">
-                    <span className="sr-only"> Remove </span>
-                    <svg className="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                      <path fillRule="evenodd" d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm7.7-3.7a1 1 0 0 0-1.4 1.4l2.3 2.3-2.3 2.3a1 1 0 1 0 1.4 1.4l2.3-2.3 2.3 2.3a1 1 0 0 0 1.4-1.4L13.4 12l2.3-2.3a1 1 0 0 0-1.4-1.4L12 10.6 9.7 8.3Z" clipRule="evenodd" />
-                    </svg>
-                  </button>
-                  <div id="tooltipRemoveItem3b" role="tooltip" className="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700">
-                    Remove item
-                    <div className="tooltip-arrow" data-popper-arrow></div>
-                  </div>
-                </div>
-              </div>
-          
-              <div className="grid grid-cols-2">
-                <div>
-                  <a href="#" className="truncate text-sm font-semibold leading-none text-gray-900 dark:text-white hover:underline">Sony Playstation 5</a>
-                  <p className="mt-0.5 truncate text-sm font-normal text-gray-500 dark:text-gray-400">$799</p>
-                </div>
-          
-                <div className="flex items-center justify-end gap-6">
-                  <p className="text-sm font-normal leading-none text-gray-500 dark:text-gray-400">Qty: 1</p>
-          
-                  <button data-tooltip-target="tooltipRemoveItem4b" type="button" className="text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-600">
-                    <span className="sr-only"> Remove </span>
-                    <svg className="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                      <path fillRule="evenodd" d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm7.7-3.7a1 1 0 0 0-1.4 1.4l2.3 2.3-2.3 2.3a1 1 0 1 0 1.4 1.4l2.3-2.3 2.3 2.3a1 1 0 0 0 1.4-1.4L13.4 12l2.3-2.3a1 1 0 0 0-1.4-1.4L12 10.6 9.7 8.3Z" clipRule="evenodd" />
-                    </svg>
-                  </button>
-                  <div id="tooltipRemoveItem4b" role="tooltip" className="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700">
-                    Remove item
-                    <div className="tooltip-arrow" data-popper-arrow></div>
-                  </div>
-                </div>
-              </div>
-          
-              <div className="grid grid-cols-2">
-                <div>
-                  <a href="#" className="truncate text-sm font-semibold leading-none text-gray-900 dark:text-white hover:underline">Apple iMac 20&quot;</a>
-                  <p className="mt-0.5 truncate text-sm font-normal text-gray-500 dark:text-gray-400">$8,997</p>
-                </div>
-          
-                <div className="flex items-center justify-end gap-6">
-                  <p className="text-sm font-normal leading-none text-gray-500 dark:text-gray-400">Qty: 3</p>
-          
-                  <button data-tooltip-target="tooltipRemoveItem5b" type="button" className="text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-600">
-                    <span className="sr-only"> Remove </span>
-                    <svg className="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                      <path fillRule="evenodd" d="M2 12a10 10 0 1 1 20 0 10 10 0 0 1-20 0Zm7.7-3.7a1 1 0 0 0-1.4 1.4l2.3 2.3-2.3 2.3a1 1 0 1 0 1.4 1.4l2.3-2.3 2.3 2.3a1 1 0 0 0 1.4-1.4L13.4 12l2.3-2.3a1 1 0 0 0-1.4-1.4L12 10.6 9.7 8.3Z" clipRule="evenodd" />
-                    </svg>
-                  </button>
-                  <div id="tooltipRemoveItem5b" role="tooltip" className="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700">
-                    Remove item
-                    <div className="tooltip-arrow" data-popper-arrow></div>
-                  </div>
-                </div>
-              </div>
+              </> }
           
               <a href="#" title="" className="mb-2 me-2 inline-flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" role="button"> Proceed to Checkout </a>
             </div>
@@ -206,7 +129,7 @@ export default function Navbar() {
             </div>
             </>) : 
             (<>
-             <a href="/carts">
+             <a href="/cart">
               <button type="button" className="inline-flex items-center rounded-lg justify-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-sm font-medium leading-none text-gray-900 dark:text-white">
               <span className="sr-only">
                 Cart
@@ -229,10 +152,13 @@ export default function Navbar() {
             </button>
 
             <div id="userDropdown2" className="hidden z-10 w-56 divide-y divide-gray-100 overflow-hidden overflow-y-auto rounded-lg bg-white antialiased shadow dark:divide-gray-600 dark:bg-gray-700">
-              <ul className="p-2 text-start text-sm font-medium text-gray-900 dark:text-white">
-                <li><a href="#" title="" className="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"> My Account </a></li>
-                <li><a href="#" title="" className="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"> My Orders </a></li>
-              </ul>
+              {/* <ul className="p-2 text-start text-sm font-medium text-gray-900 dark:text-white">
+                <li><a href="#" title="" className="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"> Sign Up</a></li>
+              </ul> */}
+
+              <div className="p-2 text-sm font-medium text-gray-900 dark:text-white hover:text-white hover:bg-primary-600 dark:hover:bg-primary-600">
+                <a href="/register" title="" className="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm"> Sign Up </a>
+              </div>
           
               <div className="p-2 text-sm font-medium text-gray-900 dark:text-white hover:text-white hover:bg-primary-600 dark:hover:bg-primary-600">
                 <a href="/login" title="" className="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm"> Login </a>
