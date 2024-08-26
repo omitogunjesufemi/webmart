@@ -7,7 +7,7 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     fetchData();
     return navigate('/');
