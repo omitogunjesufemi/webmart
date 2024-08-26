@@ -10,7 +10,7 @@ class CartService {
             const allCarts = await this.cartCollection.find({}).toArray();
             return allCarts;
         } catch (error) {
-            return ({'error': `Failed to get carts: ${error}`});
+            return null;
         }
     }
 
@@ -19,16 +19,16 @@ class CartService {
             const cart = await this.cartCollection.findOne({_id: new ObjectId(cartID)});
             return cart;
         } catch (error) {
-            return ({'error': `Failed to get cart: ${error}`});
+            return null;
         }
     }
 
-    static async getAllCartByUserID(userID) {
+    static async getCartByUserID(userID) {
         try {
-            const cartList = await this.cartCollection.find({ userID: new ObjectId(userID) }).toArray();
-            return cartList;
+            const cart = await this.cartCollection.findOne({_id: new ObjectId(userID)});
+            return cart;
         } catch (error) {
-            return ({'error': `Failed to get cart: ${error}`});
+            return null;
         }
     }
 

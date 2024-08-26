@@ -7,7 +7,7 @@ class ProductService {
     static async getAllProducts() {
         try {
             const allProducts = await this.productCollection.find({}).toArray();
-            return allProducts;  
+            return allProducts;
         } catch (error) {
             return ({'error': `Failed to get products: ${error}`});
         }
