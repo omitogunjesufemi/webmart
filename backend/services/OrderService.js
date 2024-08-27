@@ -32,17 +32,24 @@ class OrderService {
     }
 
     static async createOrder(orderObj) {
-        if (!orderObj.name) {
-            return ({'error': 'Missing order name'});
+        if (!orderObj.userEmail) {
+            return ({'error': 'Missing user for order'});
         }
 
-        if (!orderObj.email) {
-            return ({'error': 'Missing order email'});
+        if (!orderObj.billingInfo) {
+            return ({'error': 'Missing order billing information'});
+        }
+
+        if (!orderObj.cartItems) {
+            return ({'error': 'Missing order items'});
         }
 
         const order = {
-            name: orderObj.name,
-            email: orderObj.email,
+            userEmail: orderObj.userEmail,
+            billingInfo: orderObj.billingInfo,
+            cartItems: orderObj.cartItems,
+            totalPrice: orderObj.totalPrice,
+            totalQuant: orderObj.totalQuant,
         };
 
         try {

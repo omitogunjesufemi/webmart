@@ -39,6 +39,7 @@ class ProductService {
             name: productObj.name,
             price: productObj.price,
             stock: productObj.stock,
+            specs: productObj.specs || {},
         };
 
         try {
