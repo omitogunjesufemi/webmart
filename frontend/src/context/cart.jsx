@@ -20,6 +20,17 @@ export const CartProvider = ({ children }) => {
         }
     }
 
+    const addBillingInfo = (billingInfo) => {
+        const cartItems = localStorage.getItem("cartItems");
+        if (cartItems) {
+          setCartItems({billingInfo: JSON.parse(billingInfo), orderItems: JSON.parse(cartItems)});
+        }
+    }
+
+    const getTotalWeight = () => {
+        return cartItems.reduce((total, item) => total + item.specs.weight * item.quantity, 0);
+    }
+
     const removeFromCart = (item) => {
         const isItemInCart = cartItems.find((cartItem) => cartItem._id === item._id);
 
@@ -58,6 +69,8 @@ export const CartProvider = ({ children }) => {
             value={{
                 cartItems,
                 addToCart,
+                addBillingInfo,
+                getTotalWeight,
                 removeFromCart,
                 clearCart,
                 getCartTotal,
