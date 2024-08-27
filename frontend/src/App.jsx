@@ -10,7 +10,8 @@ import OrderSummary from "./pages/orders/OrderSummary";
 import ShoppingCart from "./pages/orders/ShoppingCart";
 import CheckoutPage from "./pages/orders/CheckoutPage";
 import ErrorPage from "./pages/error/ErrorPage";
-import OrdersOverview from "./pages/orders/OrdersOverview";
+// import OrdersOverview from "./pages/orders/OrdersOverview";
+import OrderReview from "./pages/orders/OrderReview";
 
 export default function App() {
   const router = createBrowserRouter(
@@ -23,9 +24,10 @@ export default function App() {
         <Route path="/products" element={<ProductListing />} />
 
         <Route path="/cart/" element={<ShoppingCart />} />
-        <Route path="/checkouts/:id" element={<CheckoutPage />} />
-        <Route path="/orders/:id" element={<OrderSummary />} />
-        <Route path="/orders" element={<OrdersOverview />} />
+        <Route path="/checkout/" element={<CheckoutPage />} />
+        <Route path="/confirm-payment" element={<OrderSummary />} />
+        <Route path="/orders/:id" element={<OrderReview />} />
+        {/* <Route path="/orders" element={<OrdersOverview />} /> */}
 
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
