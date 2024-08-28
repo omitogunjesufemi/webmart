@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function OrderReview() {
-  const [orderData, setOrderData] = useState();
-  const [billingInfo, setBillingInfo] = useState();
-  const [cartItems, setCartItems] = useState();
+  const [orderData, setOrderData] = useState({});
+  const [billingInfo, setBillingInfo] = useState({});
+  const [cartItems, setCartItems] = useState({});
 
   const {id} = useParams();
 
@@ -15,17 +15,12 @@ export default function OrderReview() {
         const data = await fetch(apiUrl);
         const order = await data.json();
         setOrderData(order);
-        setBillingInfo(orderData.billingInfo);
-        setCartItems(orderData.cartItems);
-        console.log(order);
-        console.log(orderData);
-        console.log(billingInfo);
-        console.log(cartItems);
+        setBillingInfo(order.billingInfo);
+        setCartItems(order.cartItems);
       } catch (err) {
         console.error(err);
       }
     }
-
     fetchOrder(id);
   }, [id, orderData]);
 
@@ -33,14 +28,16 @@ export default function OrderReview() {
     <>
 <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
     <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
-        <div className="mx-auto max-w-3xl mt-">
-
-        <div className="mt-6 space-y-4 border-b border-gray-200 py-8 dark:border-gray-700 sm:mt-8">
+        <div className="mx-auto max-w-3xl">
+        <h1 className="text-xl font-bold text-gray-900 dark:text-white">Order Details</h1>
+        <div className="mt-6 space-y-4 border-b border-t border-gray-200 py-8 dark:border-gray-700 sm:mt-8">
             <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Billing & Delivery information</h4>
 
             <dl>
             <dt className="text-base font-medium text-gray-900 dark:text-white">Individual</dt>
-            <dd className="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">{billingInfo.billingName} - {billingInfo.billingPhone} - {billingInfo.billingEmail}</dd>
+            <dd className="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">Order ID: {orderData._id}</dd>
+            <dd className="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">Name: {billingInfo.billingName}</dd>
+            <dd className="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">Contact: {billingInfo.billingPhone} - {billingInfo.billingEmail}</dd>
             </dl>
 
             {/* <button type="button" data-modal-target="orderData.billingInformationModal" data-modal-toggle="orderData.billingInformationModal" className="text-base font-medium text-primary-700 hover:underline dark:text-primary-500">Edit</button> */}
