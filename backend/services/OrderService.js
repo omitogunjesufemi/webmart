@@ -44,12 +44,16 @@ class OrderService {
             return ({'error': 'Missing order items'});
         }
 
+        const date = new Date();
+
         const order = {
             userEmail: orderObj.userEmail,
             billingInfo: orderObj.billingInfo,
             cartItems: orderObj.cartItems,
             totalPrice: orderObj.totalPrice,
             totalQuant: orderObj.totalQuant,
+            createdAt: date,
+            updatedAt: date
         };
 
         try {

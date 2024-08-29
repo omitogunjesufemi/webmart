@@ -27,9 +27,13 @@ class CategoryService {
             return ({'error': 'Missing category name'});
         }
 
+        const date = new Date();
+
         const category = {
             name: categoryObj.name,
             description: categoryObj.description,
+            createdAt: date,
+            updatedAt: date
         };
 
         try {

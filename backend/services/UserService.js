@@ -52,6 +52,8 @@ class UserService {
         const salt = await bcrypt.genSalt(10);
         const hashPwd = await bcrypt.hash(userObj.password.trim(), salt);
 
+        const date = new Date();
+
         const user = {
             firstName: userObj.firstName.trim(),
             lastName: userObj.lastName.trim(),
@@ -62,6 +64,8 @@ class UserService {
             isMerch: userObj.isMerch || false,
             isBuyer: userObj.isBuyer || true,
             password: hashPwd,
+            createdAt: date,
+            updatedAt: date
         };
 
         try {

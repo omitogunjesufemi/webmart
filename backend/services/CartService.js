@@ -52,11 +52,15 @@ class CartService {
             return ({'error': 'Cart product list is empty'});
         }
 
+        const date = new Date();
+
         const cart = {
             userID: cartObj.userID,
             productList: cartObj.productList,
             totalQuant: cartObj.totalQuant,
             totalPrice: cartObj.totalPrice,
+            createdAt: date,
+            updatedAt: date
         };
 
         try {

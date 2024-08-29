@@ -35,11 +35,15 @@ class ProductService {
             return ({'error': 'Missing product available quantity'});
         }
 
+        const date = new Date();
+
         const product = {
             name: productObj.name,
             price: productObj.price,
             stock: productObj.stock,
             specs: productObj.specs || {},
+            createdAt: date,
+            updatedAt: date
         };
 
         try {
