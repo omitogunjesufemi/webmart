@@ -9,8 +9,8 @@ export default function ProductCard({ product }) {
     <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
         <div className="h-56 w-full">
           <a href={`/products/${product._id}`}>
-            <img className="mx-auto h-full dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg" alt="" />
-            <img className="mx-auto hidden h-full dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="" />
+            <img className="mx-auto h-full dark:hidden" src={product.thumbnail} alt="" />
+            <img className="mx-auto hidden h-full dark:block" src={product.thumbnail} alt="" />
           </a>
         </div>
         <div className="pt-6">
@@ -68,7 +68,7 @@ export default function ProductCard({ product }) {
               </svg>
             </div>
 
-            <p className="text-sm font-medium text-gray-900 dark:text-white">5.0</p>
+            <p className="text-sm font-medium text-gray-900 dark:text-white">{product.rating}</p>
             <p className="text-sm font-medium text-gray-500 dark:text-gray-400">(455)</p>
           </div>
 

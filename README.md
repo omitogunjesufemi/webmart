@@ -17,10 +17,15 @@ Instructions on how to install and set up the project.
 The project has two folders: `frontend` and `backend`.
 1. Change directory into these folders and run:
     `npm install`
+
 2. You can run this project in the development mode:
     `npm run dev` in `frontend` directory
     `npm run start-server` in `backend` directory
 
+3. To load up data into the database, run the python scripts:
+     `python3 category_upload.py`
+     `python3 product_upload.py`
+     `python3 user_upload.py`
 
 ## Usage
 Get access to the application with your browser:

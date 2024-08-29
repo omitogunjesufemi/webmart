@@ -36,6 +36,16 @@ export default function Navbar({isLoggedIn = false}) {
                   Categories
                 </a>
               </li>
+              <li className="shrink-0">
+                <a href="/cart" title="" className="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">
+                  Cart
+                </a>
+              </li>
+              <li className="shrink-0">
+                <a href="/orders" title="" className="flex text-sm font-medium text-gray-900 hover:text-primary-700 dark:text-white dark:hover:text-primary-500">
+                  Orders
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -60,7 +70,7 @@ export default function Navbar({isLoggedIn = false}) {
                 <div className="grid grid-cols-2">
                   <div>
                   <a href="#" className="truncate text-sm font-semibold leading-none text-gray-900 dark:text-white hover:underline">{item.name}</a>
-                    <p className="mt-0.5 truncate text-sm font-normal text-gray-500 dark:text-gray-400">N {item.price}</p>
+                    <p className="mt-0.5 truncate text-sm font-normal text-gray-500 dark:text-gray-400">${item.price}</p>
                   </div>
             
                   <div className="flex items-center justify-end gap-6">

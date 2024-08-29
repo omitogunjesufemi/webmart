@@ -6,7 +6,7 @@ export default function Checkout() {
   const {getTotalWeight, getCartTotal } = useContext(CartContext);
 
   const [totalPrice] = useState(getCartTotal());
-  const [deliveryFee] = useState(getTotalWeight() * 100);
+  const [deliveryFee] = useState(getTotalWeight() * 10);
 
   const [billingName, setBillingName] = useState('');
   const [billingEmail, setBillingEmail] = useState('');
@@ -93,7 +93,7 @@ export default function Checkout() {
                 <label htmlFor="select-country-input-3" className="block text-sm font-medium text-gray-900 dark:text-white"> Country* </label>
               </div>
               <select id="select-country-input-3" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" onChange={(e) => setBillingCountry(e.target.value)} required >
-                <option selected>United States</option>
+                <option value='NGA' selected>Nigeria</option>
                 <option value="AS">Australia</option>
                 <option value="FR">France</option>
                 <option value="ES">Spain</option>
@@ -106,11 +106,11 @@ export default function Checkout() {
                 <label htmlFor="select-state-input-3" className="block text-sm font-medium text-gray-900 dark:text-white"> State* </label>
               </div>
               <select id="select-state-input-3" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" onChange={(e) => setBillingState(e.target.value)}>
-                <option selected>San Francisco</option>
-                <option value="NY">New York</option>
-                <option value="LA">Los Angeles</option>
-                <option value="CH">Chicago</option>
-                <option value="HU">Houston</option>
+                <option value='LOS' selected>Lagos</option>
+                <option value="PL">Plateau</option>
+                <option value="ABJ">Abuja</option>
+                <option value="OG">Ogun</option>
+                <option value="HU">Oyo</option>
               </select>
             </div>
 
@@ -119,11 +119,11 @@ export default function Checkout() {
                 <label htmlFor="select-city-input-3" className="block text-sm font-medium text-gray-900 dark:text-white"> City* </label>
               </div>
               <select id="select-city-input-3" className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" onChange={(e) => setBillingCity(e.target.value)} >
-                <option selected>San Francisco</option>
-                <option value="NY">New York</option>
-                <option value="LA">Los Angeles</option>
-                <option value="CH">Chicago</option>
-                <option value="HU">Houston</option>
+                <option selected>Ikorodu</option>
+                <option value="NY">Berger</option>
+                <option value="LA">Jos</option>
+                <option value="CH">Abeokuta</option>
+                <option value="HU">Ibadan</option>
               </select>
             </div>
 
@@ -178,17 +178,17 @@ export default function Checkout() {
           <div className="-my-3 divide-y divide-gray-200 dark:divide-gray-800">
             <dl className="flex items-center justify-between gap-4 py-3">
               <dt className="text-base font-normal text-gray-500 dark:text-gray-400">Subtotal</dt>
-              <dd className="text-base font-medium text-gray-900 dark:text-white">N{totalPrice}</dd>
+              <dd className="text-base font-medium text-gray-900 dark:text-white">${totalPrice}</dd>
             </dl>
 
             <dl className="flex items-center justify-between gap-4 py-3">
               <dt className="text-base font-normal text-gray-500 dark:text-gray-400">Delivery</dt>
-              <dd className="text-base font-medium text-gray-900 dark:text-white">N{deliveryFee}</dd>
+              <dd className="text-base font-medium text-gray-900 dark:text-white">${deliveryFee}</dd>
             </dl>
 
             <dl className="flex items-center justify-between gap-4 py-3">
               <dt className="text-base font-bold text-gray-900 dark:text-white">Total</dt>
-              <dd className="text-base font-bold text-gray-900 dark:text-white">N{totalPrice + deliveryFee}</dd>
+              <dd className="text-base font-bold text-gray-900 dark:text-white">${totalPrice + (deliveryFee * 1.0)}</dd>
             </dl>
           </div>
         </div>
@@ -196,7 +196,7 @@ export default function Checkout() {
         <div className="space-y-3">
           <button type="submit" className="flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4  focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Proceed to Payment</button>
 
-          <p className="text-sm font-normal text-gray-500 dark:text-gray-400">One or more items in your cart require an account. <a href="#" title="" className="font-medium text-primary-700 underline hover:no-underline dark:text-primary-500">Sign in or create an account now.</a>.</p>
+          <p className="text-sm font-normal text-gray-500 dark:text-gray-400">One or more items in your cart require an account. <a href="/register" title="" className="font-medium text-primary-700 underline hover:no-underline dark:text-primary-500">Sign in or create an account now.</a>.</p>
         </div>
       </div>
     </div>

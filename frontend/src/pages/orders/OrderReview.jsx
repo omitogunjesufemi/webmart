@@ -42,13 +42,18 @@ export default function OrderReview() {
             <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Billing & Delivery information</h4>
 
             <dl>
-            <dt className="text-base font-medium text-gray-900 dark:text-white">Individual</dt>
-            <dd className="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">Order ID: {orderData._id}</dd>
-            <dd className="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">Name: {billingInfo.billingName}</dd>
-            <dd className="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">Contact: {billingInfo.billingPhone} - {billingInfo.billingEmail}</dd>
+                <dt className="text-base font-medium text-gray-900 dark:text-white">Individual</dt>
+                <dd className="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">Name: {billingInfo.billingName}</dd>
+                <dd className="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">Contact: {billingInfo.billingPhone} - {billingInfo.billingEmail}</dd>                
             </dl>
 
-            {/* <button type="button" data-modal-target="orderData.billingInformationModal" data-modal-toggle="orderData.billingInformationModal" className="text-base font-medium text-primary-700 hover:underline dark:text-primary-500">Edit</button> */}
+            <dl>
+                <dt className="text-base font-medium text-gray-900 dark:text-white">Order Details</dt>
+                <dd className="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">Order ID: {orderData._id}</dd>
+                <dd className="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">When: {orderData.createdAt}</dd>
+                <dd className="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">Status: {orderData.isDelivered ? 'Delivered' : 'In transit'} </dd>
+                <dd className="mt-1 text-base font-normal text-gray-500 dark:text-gray-400">Payment Status: {billingInfo.billingPaymentMethod === 'PoD' ? 'Payment on Delivery' : 'Paid'} </dd>
+            </dl>
         </div>
 
         <div className="mt-6 sm:mt-8">
@@ -70,7 +75,7 @@ export default function OrderReview() {
 
                         <td className="p-4 text-base font-normal text-gray-900 dark:text-white">x{item.quantity}</td>
 
-                        <td className="p-4 text-right text-base font-bold text-gray-900 dark:text-white">N{item.price}</td>
+                        <td className="p-4 text-right text-base font-bold text-gray-900 dark:text-white">${item.price}</td>
                     </tr>
                 </>)))
                 : 
@@ -87,18 +92,18 @@ export default function OrderReview() {
                 <div className="space-y-2">
                     <dl className="flex items-center justify-between gap-4">
                         <dt className="text-gray-500 dark:text-gray-400">Original price</dt>
-                        <dd className="text-base font-medium text-gray-900 dark:text-white">N {billingInfo.subTotal}</dd>
+                        <dd className="text-base font-medium text-gray-900 dark:text-white">${billingInfo.subTotal}</dd>
                     </dl>
 
                     <dl className="flex items-center justify-between gap-4">
                         <dt className="text-gray-500 dark:text-gray-400">Delivery</dt>
-                        <dd className="text-base font-medium text-gray-900 dark:text-white">N {billingInfo.deliveryFee}</dd>
+                        <dd className="text-base font-medium text-gray-900 dark:text-white">${billingInfo.deliveryFee}</dd>
                     </dl>
                 </div>
 
                 <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
                     <dt className="text-lg font-bold text-gray-900 dark:text-white">Total</dt>
-                    <dd className="text-lg font-bold text-gray-900 dark:text-white">N {billingInfo.totalPrice}</dd>
+                    <dd className="text-lg font-bold text-gray-900 dark:text-white">${billingInfo.totalPrice}</dd>
                 </dl>
             </div>
 

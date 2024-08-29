@@ -1,6 +1,5 @@
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom"
 import { useState, useEffect } from "react";
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MainLayout from "./layouts/MainLayout";
 import HomePage from "./pages/HomePage";
@@ -28,6 +27,7 @@ export default function App() {
       <Route path="/" element={<MainLayout isLoggedIn={isLoggedIn}/>}>
         <Route index element={<HomePage />} />
         <Route path="/categories" element={<CategoriesPage />} />
+        <Route path="/categories/:category" element={<ProductsListingPage />} />
 
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/products" element={<ProductsListingPage />} />

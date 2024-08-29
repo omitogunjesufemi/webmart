@@ -52,6 +52,7 @@ class OrderService {
             cartItems: orderObj.cartItems,
             totalPrice: orderObj.totalPrice,
             totalQuant: orderObj.totalQuant,
+            isDelivered: false,
             createdAt: date,
             updatedAt: date
         };

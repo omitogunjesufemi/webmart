@@ -39,9 +39,20 @@ class ProductService {
 
         const product = {
             name: productObj.name,
+            description: productObj.description,
             price: productObj.price,
+            category: productObj.category,
+            discountPercentage: productObj.discountPercentage,
+            rating: productObj.rating,
             stock: productObj.stock,
-            specs: productObj.specs || {},
+            tags: productObj.tags,
+            brand: productObj.brand,
+            weight: productObj.weight,
+            dimensions: productObj.dimensions,
+            warrantyInformation: productObj.warrantyInformation,
+            reviews: productObj.reviews,
+            images: productObj.images,
+            thumbnail: productObj.thumbnail,
             createdAt: date,
             updatedAt: date
         };

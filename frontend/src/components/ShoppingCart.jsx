@@ -25,8 +25,8 @@ export default function ShoppingCart() {
             <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6" key={item._id}>
               <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
                 <a href="#" className="shrink-0 md:order-1">
-                  <img className="h-20 w-20 dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg" alt="imac image" />
-                  <img className="hidden h-20 w-20 dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="imac image" />
+                  <img className="h-20 w-20 dark:hidden" src={item.thumbnail} alt={item.tags} />
+                  <img className="hidden h-20 w-20 dark:block" src={item.thumbnail} alt={item.tags} />
                 </a>
 
                 <label htmlFor="counter-input" className="sr-only">Choose quantity:</label>
@@ -88,7 +88,7 @@ export default function ShoppingCart() {
 
               <dl className="flex items-center justify-between gap-4">
                 <dt className="text-base font-normal text-gray-500 dark:text-gray-400">Delivery</dt>
-                <dd className="text-base font-medium text-gray-900 dark:text-white">$ {getTotalWeight() * 100}</dd>
+                <dd className="text-base font-medium text-gray-900 dark:text-white">$ {getTotalWeight() * 10}</dd>
               </dl>
             </div>
 

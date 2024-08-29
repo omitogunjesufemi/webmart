@@ -4,6 +4,8 @@ import ProductCard from "./ProductCard";
 
 export default function ProductListing({isHome = false, category=''}) {
   const [productData, setProductData] = useState([]);
+  
+  const categoryName = category.toLowerCase().replace(' ', '-')
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -11,14 +13,22 @@ export default function ProductListing({isHome = false, category=''}) {
       try {
         const data = await fetch(apiUrl);
         const products = await data.json();
-        setProductData(products);
+        if (category !== '') {
+          const filteredProducts = products.filter(
+            (product) => product.category === categoryName
+          );
+          setProductData(filteredProducts);
+        } else {
+          setProductData(products);
+        }
+        
       } catch (err) {
         console.error(err);
       }
     }
 
     fetchProducts();
-  }, [isHome]);
+  }, [category, categoryName, isHome]);
 
   return (
     <section className="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12">
@@ -83,7 +93,7 @@ export default function ProductListing({isHome = false, category=''}) {
                       <svg className="h-5 w-5 text-gray-400 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m9 5 7 7-7 7" />
                       </svg>
-                      <span className="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400 md:ms-2">All</span>
+                      <span className="ms-1 text-sm font-medium text-gray-500 dark:text-gray-400 md:ms-2">{category !== '' ? category  : 'All' }</span>
                     </div>
                   </li>
                 </ol>

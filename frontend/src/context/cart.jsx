@@ -28,7 +28,7 @@ export const CartProvider = ({ children }) => {
     }
 
     const getTotalWeight = () => {
-        return cartItems.reduce((total, item) => total + item.specs.weight * item.quantity, 0);
+        return cartItems.reduce((total, item) => total + item.weight * item.quantity, 0);
     }
 
     const removeFromCart = (item) => {
@@ -50,7 +50,7 @@ export const CartProvider = ({ children }) => {
     }
 
     const getCartTotal = () => {
-        return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+        return cartItems.reduce((total, item) => total + item.price * (item.quantity * 1.0), 0);
     };
     
     useEffect(() => {
