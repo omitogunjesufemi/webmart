@@ -1,16 +1,25 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
-export default function Login() {
+export default function Login({prevUrl = '/'}) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const navigate = useNavigate();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    fetchData();
-    return navigate('/');
+    try {
+      await fetchData();
+      toast.success('Login successful!');
+      
+      setTimeout(() => {
+        window.location.href = prevUrl;        
+      }, 1500);
+
+    } catch (error) {
+      toast.error('Please check your credentials and try again!');
+      console.error('There was an error!', error);
+    }
   }
 
   const fetchData = async () => {
@@ -33,10 +42,10 @@ export default function Login() {
     }
 
     const authToken = await res.json();
-    document.cookie = `AUTH_API=${authToken.token}`;
-    document.cookie = `USR_FNAME=${authToken.firstName}`;
-    document.cookie = `USR_LNAME=${authToken.lastName}`;
-    document.cookie = `USR_EMAIL=${authToken.email}`; 
+    localStorage.setItem('AUTH_API', authToken.token);
+    localStorage.setItem('USR_FNAME', authToken.firstName);
+    localStorage.setItem('USR_LNAME', authToken.lastName);
+    localStorage.setItem('USR_EMAIL', authToken.email); 
   }
 
   return (
@@ -57,6 +66,8 @@ export default function Login() {
                 <label htmlFor="terms" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me!</label>
             </div>
             <button type="submit" className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none hfocus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-blue-800">Login</button>
+
+          <ToastContainer position="top-center"/>
         </form>
     </section>
   )

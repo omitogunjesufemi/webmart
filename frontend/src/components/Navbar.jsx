@@ -1,14 +1,8 @@
-import { useEffect, useState } from "react"
+/* eslint-disable react/prop-types */
 import { useContext } from "react";
 import { CartContext } from "../context/cart";
 
-export default function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    setIsLoggedIn(document.cookie.split(';').some((item) => item.trim().startsWith('USR_EMAIL')));
-  }, []);
-
+export default function Navbar({isLoggedIn = false}) {
   const { cartItems, removeFromCart } = useContext(CartContext);
 
   return (
@@ -112,15 +106,12 @@ export default function Navbar() {
             <div id="userDropdown1" className="hidden z-10 w-56 divide-y divide-gray-100 overflow-hidden overflow-y-auto rounded-lg bg-white antialiased shadow dark:divide-gray-600 dark:bg-gray-700">
               <ul className="p-2 text-start text-sm font-medium text-gray-900 dark:text-white">
                 <li><a href="#" title="" className="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"> My Account </a></li>
-                <li><a href="#" title="" className="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"> My Orders </a></li>
-                <li><a href="#" title="" className="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"> Settings </a></li>
-                <li><a href="#" title="" className="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"> Favourites </a></li>
-                <li><a href="#" title="" className="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"> Delivery Addresses </a></li>
-                <li><a href="#" title="" className="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"> Billing Data </a></li>
+                <li><a href="/orders" title="" className="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"> My Orders </a></li>
+                <li><a href="/cart" title="" className="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"> My Cart </a></li>
               </ul>
           
               <div className="p-2 text-sm font-medium text-gray-900 dark:text-white">
-                <a href="#" title="" className="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"> Sign Out </a>
+                <a href="/logout" title="" className="inline-flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600"> Sign Out </a>
               </div>
             </div>
             </>) : 
@@ -176,22 +167,13 @@ export default function Navbar() {
         <div id="ecommerce-navbar-menu-1" className="bg-gray-50 dark:bg-gray-700 dark:border-gray-600 border border-gray-200 rounded-lg py-3 hidden px-4 mt-4">
           <ul className="text-gray-900 dark:text-white text-sm font-medium dark:text-white space-y-3">
             <li>
-              <a href="#" className="hover:text-primary-700 dark:hover:text-primary-500">Home</a>
+              <a href="/" className="hover:text-primary-700 dark:hover:text-primary-500">Home</a>
             </li>
             <li>
-              <a href="#" className="hover:text-primary-700 dark:hover:text-primary-500">Best Sellers</a>
+              <a href="/products" className="hover:text-primary-700 dark:hover:text-primary-500">Products</a>
             </li>
             <li>
-              <a href="#" className="hover:text-primary-700 dark:hover:text-primary-500">Gift Ideas</a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-primary-700 dark:hover:text-primary-500">Games</a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-primary-700 dark:hover:text-primary-500">Electronics</a>
-            </li>
-            <li>
-              <a href="#" className="hover:text-primary-700 dark:hover:text-primary-500">Home & Garden</a>
+              <a href="/categories" className="hover:text-primary-700 dark:hover:text-primary-500">Categories</a>
             </li>
           </ul>
         </div>
