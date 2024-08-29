@@ -3,13 +3,12 @@ import { useContext} from 'react';
 /* eslint-disable react/prop-types */
 
 export default function ProductCard({ product }) {
-  // eslint-disable-next-line no-unused-vars
-  const { cartItems, addToCart } = useContext(CartContext)
+  const { addToCart } = useContext(CartContext)
 
   return (
     <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
         <div className="h-56 w-full">
-          <a href="#">
+          <a href={`/products/${product._id}`}>
             <img className="mx-auto h-full dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front.svg" alt="" />
             <img className="mx-auto hidden h-full dark:block" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/imac-front-dark.svg" alt="" />
           </a>
@@ -44,7 +43,7 @@ export default function ProductCard({ product }) {
             </div>
           </div>
 
-          <a href="#" className="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white">{product.name}</a>
+          <a href={`/products/${product._id}`} className="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white">{product.name}</a>
 
           <div className="mt-2 flex items-center gap-2">
             <div className="flex items-center">
