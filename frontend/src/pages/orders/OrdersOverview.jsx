@@ -1,23 +1,38 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import NoOrders from "../error/NoOrders";
 
 export default function OrdersOverview() {
   const [ordersList, setOrdersList] = useState([]);
 
   useEffect(() => {
     const fetchOrders = async () => {
+      const token = localStorage.getItem('AUTH_API');
+      const header = {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+      };
       const apiUrl = `http://localhost:5000/api/v1/orders/`;
       try {
-        const data = await fetch(apiUrl);
+        const data = await fetch(apiUrl, {
+          headers: header,
+        });
         const orders = await data.json();
         setOrdersList(orders);
       } catch (err) {
         console.error(err);
       }
     }
+    
     fetchOrders();
   }, []);
 
   return (
+    <>
+      {ordersList.length <= 0 ? 
+      (<>
+       <NoOrders />
+      </>) : 
+      (<>
 <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
   <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
     <div className="mx-auto max-w-5xl">
@@ -445,5 +460,8 @@ export default function OrdersOverview() {
     </div>
   </div>
 </section>
+      </>)}
+    </>
+
   )
 }

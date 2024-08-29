@@ -10,9 +10,17 @@ export default function OrderReview() {
 
   useEffect(() => {
     const fetchOrder = async (id) => {
+      const token = localStorage.getItem('AUTH_API');
+      const header = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      };
+
       const apiUrl = `http://localhost:5000/api/v1/orders/${id}`;
       try {
-        const data = await fetch(apiUrl);
+        const data = await fetch(apiUrl, {
+            headers: header,
+        });
         const order = await data.json();
         setOrderData(order);
         setBillingInfo(order.billingInfo);

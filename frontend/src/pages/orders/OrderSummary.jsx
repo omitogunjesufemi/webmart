@@ -1,31 +1,27 @@
 import { useContext } from "react";
 import { CartContext } from "../../context/cart";
-import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer, Bounce } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast, ToastContainer} from 'react-toastify';
 
 export default function OrderSummary() {
   const { cartItems, getCartTotal, clearCart } = useContext(CartContext);
   const billingInfo = localStorage.getItem('billingItems') ? JSON.parse(localStorage.getItem('billingItems')) : [];
 
-  const navigate = useNavigate();
-
   const submitOrder = async (e) => {
     e.preventDefault();
-    submitOrderAPI();
-    toast.success('Order sent!', {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-        transition: Bounce,
-    });
-    clearCart();
-    navigate('/products');
+    try {
+        await submitOrderAPI();
+        toast.success('Order sent!');
+        setTimeout(() => {
+            clearCart();
+            localStorage.removeItem('billingItems');
+            localStorage.removeItem('cartItems');
+            window.location.href = '/';
+        }, 1500);
+
+    } catch (error) {
+        toast.error('Error occured when sending order');
+        console.error(error);
+    }
   }
 
   const submitOrderAPI = async () => {
@@ -37,7 +33,11 @@ export default function OrderSummary() {
         totalQuant: getCartTotal()
     }
 
-    const header = {'Content-Type': 'application/json'};
+    const token = localStorage.getItem('AUTH_API');
+    const header = {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+    };
 
     const url = `http://localhost:5000/api/v1/orders`;
     const res = await fetch(url, {
@@ -51,7 +51,6 @@ export default function OrderSummary() {
 
   return (
     <>
-    <ToastContainer />
     <section className="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
     <form onSubmit={submitOrder} className="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <ol className="items-center flex w-full max-w-2xl text-center text-sm font-medium text-gray-500 dark:text-gray-400 sm:text-base">
@@ -158,6 +157,7 @@ export default function OrderSummary() {
             </div>
         </div>
         </div>
+        <ToastContainer />
     </form>
     </section>
 
